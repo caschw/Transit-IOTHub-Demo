@@ -12,5 +12,17 @@ namespace Transportation.IoTCore
             Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
             return bytes;
         }
+
+        public static IEnumerable<TResult> ForEach<T, TResult>(this IEnumerable<T> enumeration, Func<T, TResult> func)
+        {
+            //var result = new List<TResult>();
+            foreach (T item in enumeration)
+            {
+                //result.Add(func(item));
+                var result = func(item);
+                yield return result;
+            }
+            //return result;
+        }
     }
 }

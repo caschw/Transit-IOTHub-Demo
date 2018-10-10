@@ -23,11 +23,7 @@ namespace Transportation.IoTCore
 
         public async Task SendMessageBatchAsync(IEnumerable<string> msgs)
         {
-            var messages = new List<Message>();
-            foreach (var item in msgs)
-            {
-                messages.Add(new Message(item.GetBytes()));
-            }
+            var messages = msgs.ForEach((x) => { return new Message(x.GetBytes()); });
             deviceClient.SendEventBatchAsync(messages);
         }
         
